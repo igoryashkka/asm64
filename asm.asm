@@ -1,20 +1,16 @@
+; memory segmnet
 .data
-myByte db 78
-myFloat real4 70.3
+myByte db 78 ; myByte - acltually its a Ram address
+myFloat real4 70.3 ; myFloat - acltually its a Ram address
 
 .code
 FUNC proc
-	mov rax, -1
-	
-	mov al, 255
-	mov ax, 14
+  mov rax, -1 ; use move for data transmitting
+  lea rax, myByte
+  mov byte ptr[rax], 8
+  ;mov dl , byte ptr [myByte] ; the same as mov dl , myByte
 
-	mov ax, 1
-
-	mov dl , byte ptr [myByte] ; the same as mov dl , myByte
-	mov ecx, myFloat ; real4 ptr [myFloat]
-
-	ret
-	
+  ret
+  
 FUNC endp
 end
