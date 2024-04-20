@@ -1,0 +1,36 @@
+.global _start
+
+.text
+_start:
+
+        mov x0, #122 // validation value
+        mov x1, #5   // value to produce
+        mov x2, #0x11 // test value 1(not on the stack)
+        mov x5, #0xff // test value 2
+        sub sp, sp, #16 // alloc for 2 registers 
+        stp x0, x1, [sp] 
+        bl fact
+        mov x6,x0
+        ldp x0,x1, [sp]
+        add sp,sp,#16 // dealoc
+
+        nop
+        nop
+        mov x8, #93
+        svc #0
+
+fact:
+        mov x0,#1 // sum
+        mov x3,#0 // counter
+        loop:
+        add x3,x3,1 // ++
+        mul x0,x0,x3 // fact
+        cmp x3,x1 //if <
+        blt loop 
+        ret
+
+
+
+
+
+
